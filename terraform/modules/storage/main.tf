@@ -4,6 +4,10 @@ resource "aws_db_subnet_group" "example_rds_subnet_grp" {
 
   tags = merge(var.default_tags, {
     Name = "example_rds_subnet_grp_${var.environment}"
+    }, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "ee3c8d6b-fe9f-46b6-b509-2b4f2230f340"
   })
 }
 
@@ -13,6 +17,10 @@ resource "aws_security_group" "example_rds_sg" {
 
   tags = merge(var.default_tags, {
     Name = "example_rds_sg_${var.environment}"
+    }, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "5fdb6348-9493-4854-84b0-a1a20c90e40e"
   })
 
   ingress {
@@ -37,6 +45,10 @@ resource "aws_kms_key" "example_db_kms_key" {
 
   tags = merge(var.default_tags, {
     Name = "example_db_kms_key_${var.environment}"
+    }, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "c09b01d6-5868-482f-b6a2-15c1d19be23e"
   })
 }
 
@@ -58,6 +70,10 @@ resource "aws_db_instance" "example_db" {
   kms_key_id                = aws_kms_key.example_db_kms_key.arn
   tags = merge(var.default_tags, {
     Name = "example_db_${var.environment}"
+    }, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "2b19367f-6808-43d3-b9d5-39279525b23c"
   })
 }
 
@@ -67,7 +83,11 @@ resource "aws_ssm_parameter" "example_ssm_db_host" {
   type        = "String"
   value       = aws_db_instance.example_db.endpoint
 
-  tags = merge(var.default_tags, {})
+  tags = merge(var.default_tags, {}, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "3d4233ad-ed0e-4a5e-a9c9-18cf207ea8d3"
+  })
 }
 
 resource "aws_ssm_parameter" "example_ssm_db_password" {
@@ -76,7 +96,11 @@ resource "aws_ssm_parameter" "example_ssm_db_password" {
   type        = "String"
   value       = aws_db_instance.example_db.password
 
-  tags = merge(var.default_tags, {})
+  tags = merge(var.default_tags, {}, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "5012005b-d5d8-4e9c-8da6-3dc842621639"
+  })
 }
 
 resource "aws_ssm_parameter" "example_ssm_db_user" {
@@ -85,7 +109,11 @@ resource "aws_ssm_parameter" "example_ssm_db_user" {
   type        = "String"
   value       = aws_db_instance.example_db.username
 
-  tags = merge(var.default_tags, {})
+  tags = merge(var.default_tags, {}, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "391daa29-ca2f-4f25-ac0a-b6881f4a3e18"
+  })
 }
 resource "aws_ssm_parameter" "example_ssm_db_name" {
   name        = "/example-${var.environment}/DB_NAME"
@@ -95,6 +123,10 @@ resource "aws_ssm_parameter" "example_ssm_db_name" {
 
   tags = merge(var.default_tags, {
     environment = "${var.environment}"
+    }, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "d2cb0e73-1b59-4b7f-be57-26de27c94644"
   })
 }
 
@@ -103,23 +135,31 @@ resource "aws_s3_bucket" "my-private-bucket" {
 
   tags = merge(var.default_tags, {
     name = "example_private_${var.environment}"
+    }, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "2a40e231-21bb-440c-8be5-8e0d557a958a"
   })
 }
 
 resource "aws_s3_bucket" "public-bucket-oops" {
   bucket = "my-public-bucket-oops-demo"
-  
+
   tags = merge(var.default_tags, {
     name = "example_public_${var.environment}"
+    }, {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "063ebaf6-5744-4008-82a0-e499304d78e4"
   })
 }
 
 resource "aws_s3_bucket_public_access_block" "private_access" {
   bucket = aws_s3_bucket.my-private-bucket.id
 
-  ignore_public_acls  = true
-  block_public_acls   = true
-  block_public_policy = true
+  ignore_public_acls      = true
+  block_public_acls       = true
+  block_public_policy     = true
   restrict_public_buckets = true
 }
 
@@ -127,9 +167,9 @@ resource "aws_s3_bucket_public_access_block" "private_access" {
 resource "aws_s3_bucket_public_access_block" "public_access" {
   bucket = aws_s3_bucket.public-bucket-oops.id
 
-  ignore_public_acls = var.public_var
-  block_public_acls   = var.public_var
-  block_public_policy = var.public_var
+  ignore_public_acls      = var.public_var
+  block_public_acls       = var.public_var
+  block_public_policy     = var.public_var
   restrict_public_buckets = var.public_var
 }
 
