@@ -62,6 +62,9 @@ module "instance" {
 
   tags = {
     Environment = var.env
+    git_org     = "mchadd3r-pan"
+    git_repo    = "codegoat"
+    yor_trace   = "35e2925d-d112-4eab-ab3e-ecf1ee71393a"
   }
 }
 
@@ -69,4 +72,9 @@ module "instance" {
 resource "aws_ebs_volume" "i" {
   availability_zone = "${var.region}a"
   size              = 40
+  tags = {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "1bee497a-084d-4d34-9155-c1c335f8df9d"
+  }
 }

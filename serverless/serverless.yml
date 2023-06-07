@@ -20,6 +20,9 @@ functions:
     tags:
       RESOURCE: lambda
       PUBLIC: false
+      git_org: mchadd3r-pan
+      git_repo: codegoat
+      yor_trace: ac5105bb-4027-415e-987a-837b8507c005
     iamRoleStatements:
       - Effect: Allow
         Action:

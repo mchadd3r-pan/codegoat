@@ -43,6 +43,12 @@ Resources:
       Tags: 
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-ec2" 
+        - Key: git_org
+          Value: mchadd3r-pan
+        - Key: yor_trace
+          Value: af602361-6167-439a-a84c-9fc7af405748
+        - Key: git_repo
+          Value: codegoat
       UserData: 
         Fn::Base64: |
           #!/bin/bash
@@ -59,7 +65,6 @@ Resources:
   ############
   ###  S3  ###
   ############
-
   DataBucket:
     # Public, not encrypted, no access logs, no versioning
     # checkov:skip=CKV_AWS_56: not needed
@@ -71,6 +76,12 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-data"
+        - Key: git_org
+          Value: mchadd3r-pan
+        - Key: yor_trace
+          Value: a3de0153-880a-4a72-b961-2d240dca9b32
+        - Key: git_repo
+          Value: codegoat
 
 Outputs:
   EC2PublicDNS:

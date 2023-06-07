@@ -28,4 +28,9 @@ resource "aws_ecs_task_definition" "service" {
       ]
     }
   ])
+  tags = {
+    git_org   = "mchadd3r-pan"
+    git_repo  = "codegoat"
+    yor_trace = "51c7a7b9-ba4b-49a0-a383-d3757abc9733"
+  }
 }
